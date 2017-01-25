@@ -62,9 +62,9 @@ html {
 .point .point-title {
      font-size: 1.25rem;
  }
- /*.ion-music-note,
+ .ion-music-note,
  .ion-radio-waves,
  .ion-iphone {
      color: rgb(233,50,117);
      font-size: 5rem;
- }*/
+ }
