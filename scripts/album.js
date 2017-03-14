@@ -30,21 +30,6 @@
      ]
  };
 
- var albumAlbinoni = {
-     title: 'Adagio',
-     artist: 'Tomaso Albinoni',
-     label: 'Baroque',
-     year: '1705',
-     albumArtUrl: 'assets/images/album_covers/03.png',
-     songs: [
-         { title: 'Yellow', duration: '5:26' },
-         { title: 'White', duration: '4:14' },
-         { title: 'Black', duration: '1:01' },
-         { title: 'Silver', duration: '2:21'},
-         { title: 'Purple', duration: '3:15'}
-     ]
- };
-
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -81,32 +66,5 @@
  };
  
  window.onload = function() {
-     setCurrentAlbum(albumAlbinoni);
+     setCurrentAlbum(albumPicasso);
  };
-
-//var albumCover =
-document.getElementsByClassName("album-cover-art")[0].addEventListener("click", function() {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-/*  console.log(albumTitle);
-    console.log(albumTitle.firstChild.nodeValue);
-   if(albumTitle.firstChild.nodeValue=="The Colors") {
-            setCurrentAlbum(albumMarconi);
-    }
-    else if(albumTitle.firstChild.nodeValue=="The Telephone") {
-            setCurrentAlbum(albumAlbinoni);
-    }
-    else {
-            setCurrentAlbum(albumPicasso);
-    } */
-    switch(albumTitle.firstChild.nodeValue) {
-        case "The Colors":
-            setCurrentAlbum(albumMarconi);
-            break;
-        case "The Telephone":
-            setCurrentAlbum(albumAlbinoni);
-            break;
-        case "Adagio":
-            setCurrentAlbum(albumPicasso);
-            break;
-    } 
-});
