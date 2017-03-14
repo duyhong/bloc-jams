@@ -79,28 +79,25 @@
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
-
-// Creates an array of albums
-var albumArray = [albumPicasso, albumMarconi, albumAlbinoni];
-
-var index = 0; //this variable keeps track of albums in the albumArray
-
+ 
  window.onload = function() {
-     setCurrentAlbum(albumArray[index]);
+     setCurrentAlbum(albumAlbinoni);
  };
 
+//var albumCover =
 document.getElementsByClassName("album-cover-art")[0].addEventListener("click", function() {
-
-    if(index >= albumArray.length - 1) {
-        index = 0;
-        setCurrentAlbum(albumArray[index]);
+    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+/*  console.log(albumTitle);
+    console.log(albumTitle.firstChild.nodeValue);
+   if(albumTitle.firstChild.nodeValue=="The Colors") {
+            setCurrentAlbum(albumMarconi);
+    }
+    else if(albumTitle.firstChild.nodeValue=="The Telephone") {
+            setCurrentAlbum(albumAlbinoni);
     }
     else {
-        index++;
-        setCurrentAlbum(albumArray[index]);
-    }
-/*    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    for(var i=0; i)
+            setCurrentAlbum(albumPicasso);
+    } */
     switch(albumTitle.firstChild.nodeValue) {
         case "The Colors":
             setCurrentAlbum(albumMarconi);
@@ -111,6 +108,5 @@ document.getElementsByClassName("album-cover-art")[0].addEventListener("click", 
         case "Adagio":
             setCurrentAlbum(albumPicasso);
             break;
-    }
-*/
+    } 
 });
