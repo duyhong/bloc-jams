@@ -96,40 +96,40 @@
 
  var changeSong = function(mode) {
      var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-     console.log(currentSongIndex);
-     console.log(typeof mode);
-     return function() {
-         if(mode == 'next') {
-            // Note that we're _incrementing_ the song here
-            currentSongIndex++;
+     
+     //console.log(currentSongIndex);
+     //console.log(typeof mode);
+     
+     if(mode === 'next') {
+         // Note that we're _incrementing_ the song here
+         currentSongIndex++;
 
-            if (currentSongIndex >= currentAlbum.songs.length) {
-                currentSongIndex = 0;
-            }
-         } else if (mode == 'previous') {
-            // Note that we're _decrementing_ the index here
-            currentSongIndex--;
-
-            if (currentSongIndex < 0) {
-                currentSongIndex = currentAlbum.songs.length - 1;
-            }
+         if (currentSongIndex >= currentAlbum.songs.length) {
+             currentSongIndex = 0;
          }
+     } else if (mode === 'previous') {
+         // Note that we're _decrementing_ the index here
+         currentSongIndex--;
 
-        // Save the last song number before changing it
-        var lastSongNumber = currentlyPlayingSongNumber;
+         if (currentSongIndex < 0) {
+             currentSongIndex = currentAlbum.songs.length - 1;
+         }
+     }
 
-        // Set a new current song
-        setSong(currentSongIndex + 1);
+     // Save the last song number before changing it
+     var lastSongNumber = currentlyPlayingSongNumber;
 
-        // Update the Player Bar information
-        updatePlayerBarSong();
+     // Set a new current song
+     setSong(currentSongIndex + 1);
 
-        var $activeSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-        var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+     // Update the Player Bar information
+     updatePlayerBarSong();
 
-        $activeSongNumberCell.html(pauseButtonTemplate);
-        $lastSongNumberCell.html(lastSongNumber);
-         }     
+     var $activeSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+
+     $activeSongNumberCell.html(pauseButtonTemplate);
+     $lastSongNumberCell.html(lastSongNumber);   
  };
   
 var setSong = function(songNumber) {
@@ -232,8 +232,8 @@ var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
-    $previousButton.click(changeSong('previous'));
-    $nextButton.click(changeSong('next'));
+    $previousButton.click(function(){changeSong('previous');});
+    $nextButton.click(function(){changeSong('next');});
     //$previousButton.bind('ckick', {param: 'previous'}, changeSong);
     //$nextButton.bind('click', {param: 'next'}, changeSong);
 });
