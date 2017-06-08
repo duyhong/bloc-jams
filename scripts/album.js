@@ -62,12 +62,12 @@
             updateSeekBarWhileSongPlays();
             
             // My own solution
-            updateSeekPercentage($('.volume .seek-bar'), currentVolume/100);
-/*            var $volumeFill = $('.volume .fill');
+            //updateSeekPercentage($('.volume .seek-bar'), currentVolume/100);
+            var $volumeFill = $('.volume .fill');
             var $volumeThumb = $('.volume .thumb');
             $volumeFill.width(currentVolume + '%');
             $volumeThumb.css({left: currentVolume + '%'});
-*/            
+            
             $(this).html(pauseButtonTemplate);
             
             //currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
