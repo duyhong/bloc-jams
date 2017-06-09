@@ -3,7 +3,7 @@
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
  
@@ -143,12 +143,31 @@
      }
  };
 
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    $('.current-time').text(filterTimeCode(currentTime));
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    $('.total-time').text(filterTimeCode(totalTime));
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    var seconds = parseFloat(timeInSeconds);
+    return Math.floor(seconds/60) + ':' + Math.floor(seconds % 60);
+};
+
 var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
          // #10
          currentSoundFile.bind('timeupdate', function(event) {
              // #11
-             var seekBarFillRatio = this.getTime() / this.getDuration();
+             var currentTime = this.getTime();
+             
+             $totalTime = this.getDuration()
+             
+             setCurrentTimeInPlayerBar(currentTime);
+             
+             var seekBarFillRatio = this.getTime() / $totalTime;
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
@@ -389,6 +408,8 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $playerBar.html(playerBarPauseButton);
+    
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 };
 
 var togglePlayFromPlayerBar = function(){
@@ -418,6 +439,7 @@ var currentSongFromAlbum = null;
 var currentSoundFile = null;
 var currentVolume = 80;
 var $playerBar = $('.main-controls .play-pause');
+var $totalTime = 0;
  
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
