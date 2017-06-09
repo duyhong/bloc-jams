@@ -48,7 +48,7 @@
             }
         }
         */      
-         if (currentlyPlayingSongNumber !== null) {
+        if (currentlyPlayingSongNumber !== null) {
             // Revert to song number for currently playing song because user started playing new song. 
             currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
@@ -152,8 +152,12 @@ var setTotalTimeInPlayerBar = function(totalTime) {
 };
 
 var filterTimeCode = function(timeInSeconds) {
-    var seconds = parseFloat(timeInSeconds);
-    return Math.floor(seconds/60) + ':' + Math.floor(seconds % 60);
+    var time = parseFloat(timeInSeconds);
+    var seconds = Math.floor(time % 60);
+    if(seconds < 10) {
+        return Math.floor(time/60) + ':0' + seconds;
+    }
+    return Math.floor(time/60) + ':' + seconds;
 };
 
 var updateSeekBarWhileSongPlays = function() {
@@ -163,11 +167,11 @@ var updateSeekBarWhileSongPlays = function() {
              // #11
              var currentTime = this.getTime();
              
-             $totalTime = this.getDuration()
+             var totalTime = this.getDuration();
              
              setCurrentTimeInPlayerBar(currentTime);
              
-             var seekBarFillRatio = this.getTime() / $totalTime;
+             var seekBarFillRatio = currentTime / totalTime;
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
@@ -209,7 +213,7 @@ var setupSeekBars = function() {
      });
     
     // #7
-   $seekBars.find('.thumb').mousedown(function(event) {
+    $seekBars.find('.thumb').mousedown(function(event) {
          // #8
          var $seekBar = $(this).parent();
  
@@ -324,7 +328,7 @@ var seek = function(time) {
      if (currentSoundFile) {
          currentSoundFile.setTime(time);
      }
- }
+ };
 
 var setVolume = function(volume) {
      if (currentSoundFile) {
@@ -439,7 +443,6 @@ var currentSongFromAlbum = null;
 var currentSoundFile = null;
 var currentVolume = 80;
 var $playerBar = $('.main-controls .play-pause');
-var $totalTime = 0;
  
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
